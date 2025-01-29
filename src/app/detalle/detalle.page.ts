@@ -28,8 +28,12 @@ export class DetallePage implements OnInit {
       this.id = idRecibido;
       if (this.id === 'nuevo') {
         // Preparar para la inserción de un nuevo juego
-        this.document.data = {} as Juegos; // Inicializar un nuevo juego
-        this.document.id = ''; // No hay ID para un nuevo juego
+        this.document.data = {
+          nombre: '',
+          descripcion: '',
+          jugadores_min: 0,
+          precio: 0
+        } as Juegos; // Inicializar un nuevo juego
       } else {
         this.consultarPorId(this.id);
       }

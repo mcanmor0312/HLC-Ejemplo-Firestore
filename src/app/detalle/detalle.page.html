@@ -3,15 +3,15 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Detalles del Juego</ion-title>
+    <ion-title>{{ id === 'nuevo' ? 'Nuevo Juego' : 'Detalles del Juego' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>ID: {{id}}</ion-card-subtitle>
-      <ion-card-title>{{document.data.nombre}}</ion-card-title>
+      <!-- No mostrar el ID en la tarjeta -->
+      <ion-card-title>{{ id === 'nuevo' ? 'Nuevo Juego' : document.data.nombre }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
