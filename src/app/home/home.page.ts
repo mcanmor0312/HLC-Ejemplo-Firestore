@@ -86,5 +86,8 @@ export class HomePage {
       }
     });
   }
+  navigateToNew() {
+    this.router.navigate(['/detalle', 'nuevo']); // 'nuevo' es el identificador para crear un nuevo juego
+  }
 
 }

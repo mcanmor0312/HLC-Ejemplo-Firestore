@@ -1,51 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ejemplo Firestore
-    </ion-title>
+    <ion-title>Lista de Juegos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>Título</ion-label>
-    <ion-input [(ngModel)]="juegosEditando.nombre"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Descripción</ion-label>
-    <ion-input [(ngModel)]="juegosEditando.descripcion"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Jugadores</ion-label>
-    <ion-input [(ngModel)]="juegosEditando.jugadores_min"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Precio</ion-label>
-    <ion-input [(ngModel)]="juegosEditando.precio"></ion-input>
-  </ion-item>
-  
-  <ion-button (click)="clicBotonInsertar()">Añadir juego</ion-button>
-  
   <h1>LISTA DE JUEGOS</h1>
   <ion-list>
     <ion-item *ngFor="let documentJuego of arrayColeccionJuegos" (click)="selecJuego(documentJuego)">
       <ion-grid>
         <ion-row>
-          <h2>Nombre: {{documentJuego.data.nombre}}</h2>
+          <h2>{{documentJuego.data.nombre}}</h2>
         </ion-row>
         <ion-row>
-          <p>Descripcion: {{documentJuego.data.descripcion}}</p>
+          <p>{{documentJuego.data.descripcion}}</p>
         </ion-row>
         <ion-row>
-          <p>Jugadores_min: {{documentJuego.data.jugadores_min}}</p>
+          <p>Jugadores: {{documentJuego.data.jugadores_min}}</p>
         </ion-row>
         <ion-row>
-          <p>Precio: {{documentJuego.data.precio}}</p>
+          <p>Precio: {{documentJuego.data.precio}}€</p>
         </ion-row>
       </ion-grid>
     </ion-item>
   </ion-list>
 
-  <ion-button (click)="clicBotonBorrar()">Borrar juego</ion-button>
-  <ion-button (click)="clicBotonModificar()">Modificar juego</ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="navigateToNew()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

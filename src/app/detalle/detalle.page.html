@@ -1,15 +1,48 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>detalle</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles del Juego</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detalle</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <p>{{ id }}</p>
-  <p>Nombre:{{document.data.nombre}}</p>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>ID: {{id}}</ion-card-subtitle>
+      <ion-card-title>{{document.data.nombre}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form (ngSubmit)="clicBotonModificar()" #juegoForm="ngForm">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="document.data.nombre" name="nombre" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-input type="text" [(ngModel)]="document.data.descripcion" name="descripcion" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jugadores Mínimos</ion-label>
+            <ion-input type="number" [(ngModel)]="document.data.jugadores_min" name="jugadores_min" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Precio</ion-label>
+            <ion-input type="number" [(ngModel)]="document.data.precio" name="precio" required></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <div class="ion-padding">
+          <ion-button expand="block" color="danger" *ngIf="id !== 'nuevo'" (click)="clicBotonBorrar()">Borrar juego</ion-button>
+          <ion-button expand="block" color="primary" type="submit">{{ id === 'nuevo' ? 'Guardar' : 'Modificar juego' }}</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
