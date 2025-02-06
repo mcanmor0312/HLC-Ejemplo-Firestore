@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { FirestoreService } from '../firestore.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Juegos } from '../juegos';
@@ -19,7 +20,8 @@ export class DetallePage implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute, 
     private firestoreService: FirestoreService,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -52,10 +54,26 @@ export class DetallePage implements OnInit {
     });
   }
 
-  clicBotonBorrar() {
-    this.firestoreService.borrar("juegoss", this.id).then(() => {
-      this.router.navigate(['/home']);
+  async clicBotonBorrar() {
+    const alert = await this.alertController.create({
+      header: 'Confirmar borrado',
+      message: `¿Estás seguro de borrar el juego "${this.document.data.nombre}"?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }, {
+          text: 'Borrar',
+          handler: () => {
+            this.firestoreService.borrar("juegoss", this.id).then(() => {
+              this.router.navigate(['/home']);
+            });
+          }
+        }
+      ]
     });
+
+    await alert.present();
   }
 
   clicBotonModificar() {
