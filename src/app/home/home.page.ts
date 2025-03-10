@@ -24,7 +24,7 @@ export class HomePage {
     this.obtenerListaJuegos();
   } 
   obtenerListaJuegos(){
-    this.firestoreService.consultar("juegoss").subscribe((resultadoConsultaJuegos) => {
+    this.firestoreService.consultar("juegos_marcos").subscribe((resultadoConsultaJuegos) => {
       this.arrayColeccionJuegos = [];
       resultadoConsultaJuegos.forEach((datosJuegos: any) => {
         this.arrayColeccionJuegos.push({
@@ -36,7 +36,7 @@ export class HomePage {
   }
   
   clicBotonInsertar() {
-    this.firestoreService.insertar("juegoss", this.juegosEditando).then(() => {
+    this.firestoreService.insertar("juegos_marcos", this.juegosEditando).then(() => {
       console.log('juegos creada correctamente!');
       this.juegosEditando= {} as Juegos;
     }, (error) => {
@@ -56,7 +56,7 @@ export class HomePage {
   }
 
   clicBotonBorrar() {
-    this.firestoreService.borrar("juegoss", this.idjuegoSelec).then(() => {
+    this.firestoreService.borrar("juegos_marcos", this.idjuegoSelec).then(() => {
       // Actualizar la lista completa
       this.obtenerListaJuegos();
       // Limpiar datos de pantalla
@@ -64,7 +64,7 @@ export class HomePage {
     })
   }
   clicBotonModificar() {
-    this.firestoreService.actualizar("juegoss", this.idjuegoSelec, this.juegosEditando).then(() => {
+    this.firestoreService.actualizar("juegos_marcos", this.idjuegoSelec, this.juegosEditando).then(() => {
       // Actualizar la lista completa
       this.obtenerListaJuegos();
       // Limpiar datos de pantalla
@@ -76,7 +76,7 @@ export class HomePage {
     data: {} as Juegos
   };
   consultarPorId(idConsultar: string) {
-    this.firestoreService.consultarPorId("juegoss", idConsultar).subscribe((resultado) => {
+    this.firestoreService.consultarPorId("juegos_marcos", idConsultar).subscribe((resultado) => {
       if(resultado.payload.data() != null) {
         this.document.id = resultado.payload.id;
         this.document.data = resultado.payload.data();
